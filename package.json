@@ -10,5 +10,8 @@
   },
   "keywords": [],
   "author": "CarlosViniMSouza",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.22.2"
+  }
 }
