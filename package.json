@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-rocketseat",
+  "version": "1.0.0",
+  "description": "How to get out of ZERO in Node.js in just ONE class",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/script.js",
+    "dev": "node --watch --no-warnings ./src/script.js"
+  },
+  "keywords": [],
+  "author": "CarlosViniMSouza",
+  "license": "ISC"
+}
