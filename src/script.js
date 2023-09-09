@@ -38,8 +38,12 @@ server.post("/insert", (request, reply) => {
     return reply.status(201).send({ message: 'Success to submit Video!' });
 });
 
-server.delete("/delete/:id", (req, res) => {
-    return null;
+server.delete("/delete/:id", (request, reply) => {
+    const videoID = request.params.id;
+
+    db.delete(videoID);
+
+    return reply.status(204).send();
 });
 
 server.put("/modify/:id", (request, reply) => {
