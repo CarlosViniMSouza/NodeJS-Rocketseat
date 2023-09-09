@@ -1,18 +1,3 @@
-/* 
-// Creating a HTTP server with NodeJS native //
-import {createServer} from 'node:http';
-
-const port  = 3030;
-
-const server  = createServer((req, res) => {
-    res.write("Hello! ✌️🤓");
-
-    return res.end();
-});
-
-server.listen(port);
-*/
-
 import { fastify } from "fastify";
 import { DatabaseMemory } from "./db-memory.js";
 
@@ -20,8 +5,9 @@ const server = fastify();
 const db = new DatabaseMemory();
 const port = 3030;
 
-server.get("/", () => {
-    const videos = db.list();
+server.get("/", (request, reply) => {
+    const search = request.query.search;
+    const videos = db.list(search);
 
     return videos;
 });
@@ -41,7 +27,7 @@ server.post("/insert", (request, reply) => {
 server.delete("/delete/:id", (request, reply) => {
     const videoID = request.params.id;
 
-    db.delete(videoID);
+    db.deleteVideo(videoID);
 
     return reply.status(204).send();
 });
