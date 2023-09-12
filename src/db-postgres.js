@@ -4,15 +4,25 @@ import {sql} from "./db.js";
 export class DatabasePostgres {
     #videos = new Map();
 
-    list(search) {
+    async list(search) {
         let videos;
 
         if (search) {
-            videos = sql`select * from videos where title ilike`;
+            videos = await sql`select * from videos where title ilike "%${search}%"`;
+        } else {
+            videos = await sql`select * from videos`;
         }
+
+        return videos;
     };
 
-    createVideo(video) {
+    async createVideo(video) {
+        const videoID = randomUUID();
+        const { title, description, duration } = video;
+
+        await sql`
+            insert into videos (id, title, description, duration) VALUES (${videoID}, ${title}, ${description}, ${duration})
+        `
     }
 
     deleteVideo(videoID) {
